@@ -7,7 +7,7 @@ import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider attribute="class">
-    <div className="bg-white dark:bg-nft-dark min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-nft-dark">
       <Navbar />
       <Component {...pageProps} />
       <Footer />
