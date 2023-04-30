@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { ActiveOption } from './Navbar';
+import { ActiveOption } from '.';
 
 type MenuItemsProps = {
   active: ActiveOption;

@@ -4,13 +4,14 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MenuItems } from '..';
+import { ButtonGroup, MenuItems } from '..';
 import images from '../../assets';
 
-export type ActiveOption = 'Explore NFTs' | 'Listed NFTs' | 'MyNFTs';
+export type ActiveOption = 'Explore NFTs' | 'Listed NFTs' | 'MyNFTs' | '';
 
 const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const [active, setActive] = useState<ActiveOption>('Explore NFTs');
 
   useEffect(() => {
@@ -75,10 +76,12 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* MENU ITEMS DESKTOP */}
+      {/* MenuItems and ButtonGroup DESKTOP */}
       <div className="flex md:hidden">
         <MenuItems active={active} setActive={setActive} />
-        <div className="ml-4">{/* <ButtonGroup /> */}</div>
+        <div className="ml-4">
+          <ButtonGroup setActive={setActive} router={router} />
+        </div>
       </div>
     </nav>
   );
