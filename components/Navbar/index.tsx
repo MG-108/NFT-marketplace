@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [active, setActive] = useState<ActiveOption>('Explore NFTs');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTheme('dark');
@@ -74,14 +75,52 @@ const Navbar: React.FC = () => {
             <div className="ball absolute h-3 w-3 rounded-full bg-white" />
           </label>
         </div>
+
+        {/* MenuItems and ButtonGroup DESKTOP */}
+        <div className="flex md:hidden">
+          <MenuItems active={active} setActive={setActive} />
+          <div className="ml-4">
+            <ButtonGroup setActive={setActive} router={router} />
+          </div>
+        </div>
       </div>
 
-      {/* MenuItems and ButtonGroup DESKTOP */}
-      <div className="flex md:hidden">
-        <MenuItems active={active} setActive={setActive} />
-        <div className="ml-4">
-          <ButtonGroup setActive={setActive} router={router} />
-        </div>
+      {/* NAV  MD and MOBILE DEVICES */}
+      <div className="ml-2 hidden md:flex">
+        {isOpen ? (
+          <Image
+            src={images.cross}
+            style={{ objectFit: 'contain' }}
+            width={25}
+            height={20}
+            alt="close menu"
+            onClick={() => setIsOpen(false)}
+            className={theme === 'light' ? 'invert filter' : undefined}
+          />
+        ) : (
+          <Image
+            src={images.menu}
+            style={{ objectFit: 'contain' }}
+            width={25}
+            height={25}
+            alt="open menu"
+            onClick={() => setIsOpen(true)}
+            className={theme === 'light' ? 'invert filter' : undefined}
+          />
+        )}
+
+        {/* MenuItems and ButtonGroup MD and mobile devices */}
+        {isOpen && (
+          <div className="nav-h fixed inset-0 top-65 z-10 flex flex-col justify-between bg-white dark:bg-nft-dark ">
+            <div className="flex-1 p-4">
+              <MenuItems active={active} setActive={setActive} isMobile />
+            </div>
+
+            <div className="border-t border-nft-gray-1 p-4 dark:border-nft-black-1 ">
+              <ButtonGroup setActive={setActive} router={router} />
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

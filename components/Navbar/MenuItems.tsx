@@ -39,7 +39,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   return (
     <ul
       className={`flexCenter list-none flex-row ${
-        isMobile && 'h-full flex-col'
+        isMobile && 'h-full flex-col '
       }`}
     >
       {activeOptionsList.map((item, i) => (
@@ -49,6 +49,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
             setActive(item);
           }}
           className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white 
+          ${isMobile && 'py-2'}
           ${
             active === item
               ? 'text-nft-black-1 dark:text-white'
