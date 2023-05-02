@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { NextRouter } from 'next/router';
 import { Button } from '..';
 import { ActiveOption } from '.';
 
 type ButtonGroupProps = {
-  // eslint-disable-next-line no-unused-vars
   setActive: (value: React.SetStateAction<ActiveOption>) => void;
   router: NextRouter;
 };

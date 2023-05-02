@@ -15,40 +15,39 @@ const activeOptionsList: ActiveOption[] = [
   'MyNFTs',
 ];
 
+const generateLink = (i: number) => {
+  switch (i) {
+    case 0:
+      return '/';
+
+    case 1:
+      return '/created-nfts';
+
+    case 2:
+      return '/my-nfts';
+
+    default:
+      return '/';
+  }
+};
+
 const MenuItems: React.FC<MenuItemsProps> = ({
   isMobile,
   active,
   setActive,
-}) => {
-  const generateLink = (i: number) => {
-    switch (i) {
-      case 0:
-        return '/';
-
-      case 1:
-        return '/created-nfts';
-
-      case 2:
-        return '/my-nfts';
-
-      default:
-        return '/';
-    }
-  };
-
-  return (
-    <ul
-      className={`flexCenter list-none flex-row ${
-        isMobile && 'h-full flex-col '
-      }`}
-    >
-      {activeOptionsList.map((item, i) => (
-        <li
-          key={i}
-          onClick={() => {
-            setActive(item);
-          }}
-          className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white 
+}) => (
+  <ul
+    className={`flexCenter list-none flex-row ${
+      isMobile && 'h-full flex-col '
+    }`}
+  >
+    {activeOptionsList.map((item, i) => (
+      <li
+        key={i}
+        onClick={() => {
+          setActive(item);
+        }}
+        className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white 
           ${isMobile && 'py-2'}
           ${
             active === item
@@ -56,13 +55,12 @@ const MenuItems: React.FC<MenuItemsProps> = ({
               : 'text-nft-gray-2 dark:text-nft-gray-3'
           }
            `}
-        >
-          <Link href={generateLink(i)}>{item}</Link>
-        </li>
-      ))}
-    </ul>
-  );
-};
+      >
+        <Link href={generateLink(i)}>{item}</Link>
+      </li>
+    ))}
+  </ul>
+);
 
 MenuItems.defaultProps = {
   isMobile: false,
