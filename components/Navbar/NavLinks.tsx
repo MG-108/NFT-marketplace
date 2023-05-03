@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { ActiveOption } from '.';
 
-type MenuItemsProps = {
+type NavLinksProps = {
   active: ActiveOption;
   setActive: React.Dispatch<React.SetStateAction<ActiveOption>>;
   isMobile?: boolean;
@@ -31,13 +31,9 @@ const generateLink = (i: number) => {
   }
 };
 
-const MenuItems: React.FC<MenuItemsProps> = ({
-  isMobile,
-  active,
-  setActive,
-}) => (
+const NavLinks: React.FC<NavLinksProps> = ({ isMobile, active, setActive }) => (
   <ul
-    className={`flexCenter list-none flex-row ${
+    className={`flexCenter  list-none flex-row ${
       isMobile && 'h-full flex-col '
     }`}
   >
@@ -62,8 +58,8 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   </ul>
 );
 
-MenuItems.defaultProps = {
+NavLinks.defaultProps = {
   isMobile: false,
 };
 
-export default MenuItems;
+export default NavLinks;
