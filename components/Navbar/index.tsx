@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
           />
           <label
             htmlFor="checkbox"
-            className="flexBetween label relative h-4 w-8 rounded-2xl bg-black p-1"
+            className="flexBetween label relative h-4 w-8 cursor-pointer rounded-2xl bg-black p-1"
           >
             {/* fontAwesome icons */}
             <i className="fas fa-sun" />
