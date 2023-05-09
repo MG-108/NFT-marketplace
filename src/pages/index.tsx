@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
 import images from '../../assets';
-import { Banner, CreatorCard } from '../../components';
+import { Banner, CreatorCard, NFTCard } from '../../components';
 import { makeId } from '../../utils/makeId';
 
 const Home: NextPage = () => {
@@ -27,33 +27,26 @@ const Home: NextPage = () => {
 
   // Checks whether the content inside the scrollable container is wider
   // than the container itself, and returns a boolean value.
-  const isScrollable = (): boolean => {
-    // Get a reference to the scrollable container element
+  const isScrollable = () => {
     const { current } = scrollRef;
-
-    // Get a reference to the parent element of the scrollable container
     const { current: parent } = parentRef;
 
     // Check whether the scrollable container is wider than its parent element
-    return current?.scrollWidth >= parent?.offsetWidth;
+    if (current && parent) {
+      if (current?.scrollWidth >= parent?.offsetWidth) {
+        setHideButtons(false);
+      } else {
+        setHideButtons(true);
+      }
+    }
   };
 
-  // Define a function that updates the visibility of the scroll buttons when the window is resized
-  const handleResize = () => {
-    setHideButtons(!isScrollable());
-  };
-
-  // Call the isScrollable function when the component mounts or the window is resized
   useEffect(() => {
-    // Initialize the visibility of the scroll buttons based on whether the cards are scrollable
-    setHideButtons(!isScrollable());
+    isScrollable();
 
-    // Add a resize event listener to the window
-    window.addEventListener('resize', handleResize);
-
-    // Remove the resize event listener when the component unmounts
+    window.addEventListener('resize', isScrollable);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', isScrollable);
     };
   }, []);
 
@@ -81,7 +74,7 @@ const Home: NextPage = () => {
                   key={`creator-${i}`}
                   rank={i}
                   creatorImage={images[`creator${i}` as keyof typeof images]}
-                  creatorAdress={`0x${makeId(3)}...${makeId(4)}`}
+                  creatorAdress="0xAdress"
                   creatorsEths={10 - i * 0.5}
                 />
               ))}
@@ -120,6 +113,29 @@ const Home: NextPage = () => {
                 </>
               ) : null}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div className="flexBetween mx-4 sm:flex-col sm:items-start xs:mx-0 minlg:mx-8">
+            <h1 className="flex-1 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white sm:mb-4 minlg:text-4xl">
+              Top NFTs
+            </h1>
+            <div>SearchBar</div>
+          </div>
+          <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+              <NFTCard
+                key={`nft-${i}`}
+                nft={{
+                  i,
+                  name: `Nifty NFT ${i}`,
+                  price: (10 - i * 0.5).toFixed(2),
+                  seller: '0xSeller',
+                  owner: '0xOwner',
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,3 @@
-/* eslint-disable no-plusplus */
-
-// hard coded: create a unique blockchain adress
 export const makeId = (length: number): string => {
   let result = '';
 
