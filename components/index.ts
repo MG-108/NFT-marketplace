@@ -4,8 +4,11 @@ import ButtonGroup from './Navbar/ButtonGroup';
 
 import Banner from './Banner';
 import CreatorCard from './CreatorCard';
-import Button from './Button';
 import NFTCard from './NFTCard';
+
+import Button from './Button';
+import HeadingText from './Text/HeadingText';
+import ParagraphText from './Text/ParagraphText';
 
 import Footer from './Footer';
 import FooterLinks from './Footer/FooterLinks';
@@ -18,6 +21,8 @@ export {
   CreatorCard,
   NFTCard,
   Button,
+  HeadingText,
+  ParagraphText,
   Footer,
   FooterLinks,
 };

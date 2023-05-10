@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
 import images from '../../assets';
-import { Banner, CreatorCard, NFTCard } from '../../components';
+import { Banner, CreatorCard, HeadingText, NFTCard } from '../../components';
 import { makeId } from '../../utils/makeId';
 
 const Home: NextPage = () => {
@@ -59,10 +59,9 @@ const Home: NextPage = () => {
           childStyles="md:text-4xl sm:text-2xl xs:text-xl text-left"
         />
 
+        {/* TOP SELLER SECTION */}
         <div>
-          <h1 className="ml-4 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white xs:ml-0 minlg:text-4xl">
-            Top Sellers
-          </h1>
+          <HeadingText text="Top Sellers" classStyles="ml-4 xs:ml-0" />
 
           <div className="relative mt-3 flex max-w-full flex-1" ref={parentRef}>
             <div
@@ -116,13 +115,13 @@ const Home: NextPage = () => {
           </div>
         </div>
 
+        {/* TOP NFTs SECTION */}
         <div className="mt-10">
           <div className="flexBetween mx-4 sm:flex-col sm:items-start xs:mx-0 minlg:mx-8">
-            <h1 className="flex-1 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white sm:mb-4 minlg:text-4xl">
-              Top NFTs
-            </h1>
+            <HeadingText text="Top NFTs" classStyles="flex-1 sm:mb-4" />
             <div>SearchBar</div>
           </div>
+
           <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
               <NFTCard
