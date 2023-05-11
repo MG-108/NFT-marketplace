@@ -6,6 +6,7 @@ import Banner from './Banner';
 import CreatorCard from './CreatorCard';
 import NFTCard from './NFTCard';
 
+import Input from './Input';
 import Button from './Button';
 import HeadingText from './Text/HeadingText';
 import ParagraphText from './Text/ParagraphText';
@@ -20,6 +21,7 @@ export {
   Banner,
   CreatorCard,
   NFTCard,
+  Input,
   Button,
   HeadingText,
   ParagraphText,

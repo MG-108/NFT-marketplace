@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ButtonGroup, NavLinks } from '..';
+import { ButtonGroup, NavLinks, ParagraphText } from '..';
 import images from '../../assets';
 
 export type ActiveOption = 'Explore NFTs' | 'Listed NFTs' | 'MyNFTs' | '';
@@ -35,9 +35,8 @@ const Navbar: React.FC = () => {
               height={32}
               alt="logo"
             />
-            <p className="ml-1 text-lg font-semibold text-nft-black-1 dark:text-white">
-              ArtHive
-            </p>
+
+            <ParagraphText text="ArtHive" classStyles="ml-1 text-lg" />
           </div>
         </Link>
 
@@ -85,7 +84,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* NAV  MD and MOBILE DEVICES */}
+      {/* NAV  MOBILE DEVICES */}
       <div className="ml-2 hidden md:flex">
         {isOpen ? (
           <Image

@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
-import { Button, HeadingText } from '../../components';
+import { Button, HeadingText, Input } from '../../components';
 import images from '../../assets';
 import ParagraphText from '../../components/Text/ParagraphText';
 
@@ -12,6 +12,11 @@ type Props = {};
 
 const CreateNFT: React.FC<Props> = () => {
   const [fileUrl, setFileUrl] = useState(null);
+  const [formInput, setFormInput] = useState({
+    name: '',
+    description: '',
+    price: '',
+  });
   const { theme } = useTheme();
 
   const onDrop = useCallback(() => {
@@ -44,8 +49,7 @@ const CreateNFT: React.FC<Props> = () => {
         <HeadingText text="Create new NFT" classStyles="ml-4 xs:ml-0" />
 
         <div className="mt-16">
-          <ParagraphText classStyles="text-xl" text="Upload File" />
-
+          <ParagraphText classStyles="text-xl" text="Upload File" poppins />
           {/* FILE DROPZONE SECTION */}
           <div className="mt-4">
             <div {...getRootProps()} className={fileStyle}>
@@ -54,6 +58,7 @@ const CreateNFT: React.FC<Props> = () => {
                 <ParagraphText
                   classStyles="text-xl"
                   text="JPG, PNG, GIF, SVG, WEBM Max 100mb."
+                  poppins
                 />
 
                 <div className="my-12 flex w-full justify-center">
@@ -70,10 +75,12 @@ const CreateNFT: React.FC<Props> = () => {
                   <ParagraphText
                     text="Drag and Drop File"
                     classStyles="text-sm"
+                    poppins
                   />
                   <ParagraphText
                     text="or Browse media on your device"
                     classStyles="text-sm mt-2"
+                    poppins
                   />
                 </div>
               </div>
@@ -86,6 +93,48 @@ const CreateNFT: React.FC<Props> = () => {
                 </aside>
               )}
             </div>
+          </div>
+
+          <Input
+            inputType="input"
+            title="Name"
+            placeholder="NFT Name"
+            handleClick={(e) =>
+              setFormInput({
+                ...formInput,
+                name: (e.target as HTMLInputElement).value,
+              })
+            }
+          />
+          <Input
+            inputType="textarea"
+            title="Description"
+            placeholder="NFT Description"
+            handleClick={(e) =>
+              setFormInput({
+                ...formInput,
+                description: (e.target as HTMLTextAreaElement).value,
+              })
+            }
+          />
+          <Input
+            inputType="number"
+            title="Price"
+            placeholder="NFT Price"
+            handleClick={(e) =>
+              setFormInput({
+                ...formInput,
+                price: (e.target as HTMLInputElement).value,
+              })
+            }
+          />
+
+          <div className="mt-7 flex w-full justify-end">
+            <Button
+              btnName="Create Item"
+              classStyles="rounded-xl"
+              handleClick={() => {}}
+            />
           </div>
         </div>
       </div>

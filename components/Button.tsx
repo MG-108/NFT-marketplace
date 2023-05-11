@@ -1,9 +1,9 @@
 import React from 'react';
 
 type ButtonProps = {
-  classStyles: string;
+  classStyles?: string;
   btnName: string;
-  handleClick?: () => void;
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,3 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   </button>
 );
 export default Button;
+
+Button.defaultProps = {
+  classStyles: '',
+  handleClick: () => {},
+};
