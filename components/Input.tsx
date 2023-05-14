@@ -15,7 +15,7 @@ const Input: React.FC<Props> = ({
   handleClick,
 }) => {
   const inputStyles =
-    'mt-4 w-full rounded-lg border border-nft-gray-2 bg-white px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white';
+    'mt-4 w-full rounded-lg border border-nft-gray-2 bg-neutral-100 px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white';
 
   return (
     <div className="mt-10 w-full">
@@ -27,7 +27,7 @@ const Input: React.FC<Props> = ({
             type="number"
             placeholder={placeholder}
             onChange={handleClick}
-            className="w-full bg-white outline-none dark:bg-nft-black-1"
+            className="w-full bg-neutral-100 outline-none dark:bg-nft-black-1"
           />
           <ParagraphText text="ETH" classStyles="text-xl" poppins />
         </div>
