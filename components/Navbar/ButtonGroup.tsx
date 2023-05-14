@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import { useContext } from 'react';
 import { NextRouter } from 'next/router';
+
+import { NFTContext } from '../../context/NFTContext';
 import { Button } from '..';
 import { ActiveOption } from '.';
 
@@ -10,9 +12,9 @@ type ButtonGroupProps = {
 };
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({ setActive, router }) => {
-  const hasConnected = true;
+  const { connectWallet, currentAccount } = useContext(NFTContext);
 
-  return hasConnected ? (
+  return currentAccount ? (
     <Button
       btnName="Create"
       classStyles="mx-2 rounded-xl"
@@ -26,7 +28,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ setActive, router }) => {
     <Button
       btnName="Connect"
       classStyles="mx-2 rounded-xl"
-      handleClick={() => {}}
+      handleClick={connectWallet}
     />
   );
 };
