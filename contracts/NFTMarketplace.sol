@@ -1,6 +1,8 @@
-//SPDX-License-Identifier: Unlicense
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4; // set version to match with what we have in our hardhat configuration
 
+// Using ERC721 standard
+// Functionality we can use
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -18,8 +20,8 @@ contract NFTMarketplace is ERC721URIStorage {
 
     // when the first token is minted it'll get a value of zero, the second one is one
     // and then using counters this we'll increment token ids
-    Counters.Counter private _tokensIds;
-    Counters.Counter private itemsSold;
+    Counters.Counter private _tokenIds;
+    Counters.Counter private _itemsSold;
 
     // fee to list an nft on the marketplace
     // charge a listing fee.
@@ -54,7 +56,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     // set the owner as the msg.sender
     // the owner of the contract is the one deploying it
-    constructor() ERC721("Metaverse Tokens", "METT") {
+    constructor() ERC721("Art Tokens", "ATT") {
       owner = payable(msg.sender);
     }
 
@@ -123,7 +125,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     //allows someone to resell a token they have purchased
     function resellToken(uint256 tokenId, uint256 price) public payable {
-      require(idTokenMarketItem[tokenId].owner == msg.sender, "Only item owner can perform this operation");
+      require(idToMarketItem[tokenId].owner == msg.sender, "Only item owner can perform this operation");
       require(msg.value == listingPrice, "Price must be equal to listing price");
 
       idToMarketItem[tokenId].sold = false;
@@ -151,7 +153,7 @@ contract NFTMarketplace is ERC721URIStorage {
       _itemsSold.increment();
 
       // next, we want to transfer the NFT ownership from the seller to the buyer
-      _transfer(adress(this), msg.sender, tokenId);
+      _transfer(address(this), msg.sender, tokenId);
 
       //sending the listingPrice fee to the owner of the NFTMarketPlace
       payable(owner).transfer(listingPrice);
