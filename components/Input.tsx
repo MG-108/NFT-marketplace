@@ -1,5 +1,7 @@
-import React from 'react';
+import { useContext } from 'react';
 import { ParagraphText } from '.';
+
+import { NFTContext } from '../context/NFTContext';
 
 type Props = {
   inputType: string;
@@ -14,6 +16,8 @@ const Input: React.FC<Props> = ({
   placeholder,
   handleClick,
 }) => {
+  const { nftCurrency } = useContext(NFTContext);
+
   const inputStyles =
     'mt-4 w-full rounded-lg border border-nft-gray-2 bg-neutral-100 px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white';
 
@@ -29,7 +33,7 @@ const Input: React.FC<Props> = ({
             onChange={handleClick}
             className="w-full bg-neutral-100 outline-none dark:bg-nft-black-1"
           />
-          <ParagraphText text="ETH" classStyles="text-xl" poppins />
+          <ParagraphText text={nftCurrency} classStyles="text-xl" poppins />
         </div>
       ) : inputType === 'textarea' ? (
         <textarea
