@@ -121,8 +121,42 @@ contract NFTMarketplace is ERC721URIStorage {
       );
     }
 
+    //allows someone to resell a token they have purchased
     function resellToken(uint256 tokenId, uint256 price) public payable {
       require(idTokenMarketItem[tokenId].owner == msg.sender, "Only item owner can perform this operation");
+      require(msg.value == listingPrice, "Price must be equal to listing price");
+
+      idToMarketItem[tokenId].sold = false;
+      idToMarketItem[tokenId].price = price;
+      idToMarketItem[tokenId].seller = payable(msg.sender);
+      idToMarketItem[tokenId].owner = payable(address(this));
+      
+      _itemsSold.decrement();
+
+       _transfer(msg.sender, address(this), tokenId);
+
+    }
+
+    //Creates the sale of a marketplace item 
+    //Transfers ownership of the item, as well as funds between parties 
+    function createMarketSale(uint256 tokenId) public payable {
+      uint price = idToMarketItem[tokenId].price;
+
+      require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+
+      idToMarketItem[tokenId].owner = payable(msg.sender);
+      idToMarketItem[tokenId].sold = true;
+      idToMarketItem[tokenId].seller = payable(address(0));
+
+      _itemsSold.increment();
+
+      // next, we want to transfer the NFT ownership from the seller to the buyer
+      _transfer(adress(this), msg.sender, tokenId);
+
+      //sending the listingPrice fee to the owner of the NFTMarketPlace
+      payable(owner).transfer(listingPrice);
+      // sending the amount(nft price) from the buyer to the seller
+      payable(idToMarketItem[tokenId].seller).transfer(msg.value);
     }
 
 }
