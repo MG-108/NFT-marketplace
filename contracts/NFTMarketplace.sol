@@ -92,7 +92,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
      function createMarketItem(uint256 tokenId, uint256 price) private {
       // require a certain CONDITION, in this case price greater than 0
-      require(price > 0, "Price must be at least 1 wei");
+      require(price > 0, "Price must be at least 1");
       // require that the users sending in the transaction is sending in the correct amount
       require(msg.value == listingPrice, "Price must be equal to listing price");
 
@@ -119,6 +119,10 @@ contract NFTMarketplace is ERC721URIStorage {
         price,
         false
       );
+    }
+
+    function resellToken(uint256 tokenId, uint256 price) public payable {
+      require(idTokenMarketItem[tokenId].owner == msg.sender, "Only item owner can perform this operation");
     }
 
 }
