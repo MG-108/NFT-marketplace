@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
-}
-
-module.exports = nextConfig
+  swcMinify: true,
+  images: {
+    domains: ['infura-ipfs.io', 'arthive.infura-ipfs.io'],
+  },
+};
+module.exports = nextConfig;

@@ -1,34 +1,27 @@
 import { useState, useMemo, useCallback, useContext } from 'react';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
+import { IFormInput } from '../../types/NFT';
 import { NFTContext } from '../../context/NFTContext';
-import { Button, HeadingText, Input } from '../../components';
+import { Button, HeadingText, Input, ParagraphText } from '../../components';
 import images from '../../assets';
-import ParagraphText from '../../components/Text/ParagraphText';
-
-interface IFormInput {
-  name: string;
-  description: string;
-  price: string;
-}
 
 const CreateNFT: React.FC = () => {
-  const [fileUrl, setFileUrl] = useState<null | string>(null);
+  const [fileUrl, setFileUrl] = useState<string>('');
   const [formInput, setFormInput] = useState<IFormInput>({
     name: '',
     description: '',
     price: '',
   });
   const { theme } = useTheme();
-  const { updloadToIPFS } = useContext(NFTContext);
+  const { updloadToIPFS, createNft } = useContext(NFTContext);
+  const router = useRouter();
 
   const onDrop = useCallback(async (acceptedfile: File[]) => {
     const url = await updloadToIPFS(acceptedfile[0]);
-
-    console.log(url);
 
     if (url !== undefined) {
       setFileUrl(url);
@@ -144,9 +137,9 @@ const CreateNFT: React.FC = () => {
 
           <div className="mt-7 flex w-full justify-end">
             <Button
-              btnName="Create Item"
+              btnName="Create NFT"
               classStyles="rounded-xl"
-              handleClick={() => {}}
+              handleClick={() => createNft(formInput, fileUrl, router)}
             />
           </div>
         </div>
