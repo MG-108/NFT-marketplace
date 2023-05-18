@@ -1,3 +1,35 @@
+import { BigNumber, ethers } from 'ethers';
+
+export interface IFormInput {
+  name: string;
+  description: string;
+  price: string;
+}
+
+export interface IRawNFTData {
+  tokenId: ethers.BigNumber;
+  seller: string;
+  owner: string;
+  price: ethers.BigNumber;
+}
+
+export interface INFTMetadata {
+  image: string;
+  name: string;
+  description: string;
+}
+
+export interface IFormattedNFT {
+  price: string;
+  tokenId: number;
+  seller: string;
+  owner: string;
+  image: string;
+  name: string;
+  description: string;
+  tokenURI: string;
+}
+
 export interface INFTContext {
   nftCurrency: string;
   connectWallet: () => Promise<void>;
@@ -8,10 +40,11 @@ export interface INFTContext {
     fileUrl: string,
     router: NextRouter
   ) => Promise<void>;
-}
-
-export interface IFormInput {
-  name: string;
-  description: string;
-  price: string;
+  createSale: (
+    url: string,
+    formInputPrice: string,
+    isReselling: any,
+    id: any
+  ) => Promise<void>;
+  fetchNFTs: () => Promise<IFormattedNFT[]>;
 }

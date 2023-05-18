@@ -4,7 +4,13 @@ import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import axios from 'axios';
 
-import { INFTContext, IFormInput } from '../types/NFT';
+import {
+  INFTContext,
+  IFormInput,
+  IFormattedNFT,
+  IRawNFTData,
+  INFTMetadata,
+} from '../types/NFT';
 import { client } from '../services/IPFSConfig';
 import validateEnv from '../utils/validateEnv';
 import { MarketAddress, MarketAddressABI } from './constants';
@@ -116,6 +122,43 @@ export const NFTProvider = ({ children }: { children: React.ReactNode }) => {
     await transaction.wait();
   };
 
+  const fetchNFTs = async (): Promise<IFormattedNFT[]> => {
+    const provider = new ethers.providers.JsonRpcProvider();
+    const contract = fetchContract(provider);
+
+    const data = await contract.fetchMarketItems();
+
+    const items = await Promise.all(
+      (data as IRawNFTData[]).map(
+        async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+          const tokenURI = await contract.tokenURI(tokenId);
+
+          const {
+            data: { image, name, description },
+          } = await axios.get<INFTMetadata>(tokenURI);
+
+          const price = ethers.utils.formatUnits(
+            unformattedPrice.toString(),
+            'ether'
+          );
+
+          return {
+            price,
+            tokenId: tokenId.toNumber(),
+            seller,
+            owner,
+            image,
+            name,
+            description,
+            tokenURI,
+          };
+        }
+      )
+    );
+
+    return items;
+  };
+
   return (
     <NFTContext.Provider
       value={{
@@ -124,6 +167,8 @@ export const NFTProvider = ({ children }: { children: React.ReactNode }) => {
         currentAccount,
         updloadToIPFS,
         createNft,
+        createSale,
+        fetchNFTs,
       }}
     >
       {children}

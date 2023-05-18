@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { NFTContext } from '../context/NFTContext';
 import images from '../assets';
+import { shortenAddress } from '../utils/shortenAddress';
 
 interface NFTDetails {
   i?: number;
@@ -42,7 +43,7 @@ const NFTCard: React.FC<Props> = ({ nft }) => {
             {nft.price} <span className="normal">{nftCurrency}</span>
           </p>
           <p className='minlg:text-lg" font-poppins text-xs font-semibold text-nft-black-1 dark:text-white'>
-            {nft.seller}
+            {shortenAddress(nft.seller)}
           </p>
         </div>
       </div>
