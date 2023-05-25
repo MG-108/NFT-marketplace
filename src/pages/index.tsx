@@ -4,22 +4,22 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
 import { NFTContext } from '../../context/NFTContext';
+import { IFormattedNFT } from '../../types/NFT';
 import images from '../../assets';
 import { Banner, CreatorCard, HeadingText, NFTCard } from '../../components';
 import { makeId } from '../../utils/makeId';
 
 const Home: NextPage = () => {
   const { fetchNFTs } = useContext(NFTContext);
-  const [hideButtons, setHideButtons] = useState<boolean>(false);
-  const [nfts, setNfts] = useState<any[]>([]);
   const { theme } = useTheme();
+  const [hideButtons, setHideButtons] = useState<boolean>(false);
+  const [nfts, setNfts] = useState<IFormattedNFT[]>([]);
   const parentRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchNFTs().then((items) => {
       setNfts(items);
-      console.log(items);
     });
   }, []);
 

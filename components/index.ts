@@ -14,6 +14,8 @@ import ParagraphText from './Text/ParagraphText';
 import Footer from './Footer';
 import FooterLinks from './Footer/FooterLinks';
 
+import Loader from './Loader';
+
 export {
   Navbar,
   NavLinks,
@@ -27,4 +29,5 @@ export {
   ParagraphText,
   Footer,
   FooterLinks,
+  Loader,
 };

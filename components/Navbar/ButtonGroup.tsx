@@ -9,9 +9,14 @@ import { ActiveOption } from '.';
 type ButtonGroupProps = {
   setActive: (value: React.SetStateAction<ActiveOption>) => void;
   router: NextRouter;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ setActive, router }) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
+  setActive,
+  setIsOpen,
+  router,
+}) => {
   const { connectWallet, currentAccount } = useContext(NFTContext);
 
   return currentAccount ? (
@@ -22,6 +27,12 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ setActive, router }) => {
         setActive('');
 
         router.push('/create-nft');
+
+        if (setIsOpen) {
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 200);
+        }
       }}
     />
   ) : (

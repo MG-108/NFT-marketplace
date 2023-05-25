@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = () => {
             <input
               type="email"
               placeholder="Your Email"
-              className="h-full w-full flex-1 rounded-lg bg-white px-4 text-xs font-normal text-nft-black-1 outline-none dark:bg-nft-black-2 dark:text-white minlg:text-lg"
+              className="h-full w-full flex-1 rounded-lg bg-neutral-100 px-4 text-xs font-normal text-nft-black-1 outline-none dark:bg-nft-black-2 dark:text-white minlg:text-lg"
             />
             <div>
               <Button btnName="Email Me" classStyles="rounded-md" />

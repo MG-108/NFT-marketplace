@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4; // set version to match with what we have in our hardhat configuration
 
 // Using ERC721 standard
@@ -230,7 +230,7 @@ contract NFTMarketplace is ERC721URIStorage {
     }
 
     // Returns only items a user has listed 
-    function fetchItemListed() public view returns (MarketItem[] memory) {
+    function fetchItemsListed() public view returns (MarketItem[] memory) {
       uint totalItemCount = _tokenIds.current();
       uint itemCount = 0;
       uint currentIndex = 0;

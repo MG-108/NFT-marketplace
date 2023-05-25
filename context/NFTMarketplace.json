@@ -196,7 +196,7 @@
     },
     {
       "inputs": [],
-      "name": "fetchItemListed",
+      "name": "fetchItemsListed",
       "outputs": [
         {
           "components": [

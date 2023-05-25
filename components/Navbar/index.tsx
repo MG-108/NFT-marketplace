@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
         <Link href="/">
           <div
             className="flexCenter cursor-pointer md:hidden"
-            onClick={() => {}}
+            onClick={() => setActive('Explore NFTs')}
           >
             <Image
               src={images.logo02}
@@ -42,7 +42,10 @@ const Navbar: React.FC = () => {
 
         {/* LOGO MD and MOBILE DEVICES */}
         <Link href="/">
-          <div className="hidden md:flex" onClick={() => {}}>
+          <div
+            className="hidden md:flex"
+            onClick={() => setActive('Explore NFTs')}
+          >
             <Image
               src={images.logo02}
               style={{ objectFit: 'contain' }}
@@ -112,11 +115,20 @@ const Navbar: React.FC = () => {
         {isOpen && (
           <div className="nav-h fixed inset-0 top-65 z-10 flex flex-col justify-between bg-white dark:bg-nft-dark ">
             <div className="flex-1 p-4">
-              <NavLinks active={active} setActive={setActive} isMobile />
+              <NavLinks
+                active={active}
+                setActive={setActive}
+                setIsOpen={setIsOpen}
+                isMobile
+              />
             </div>
 
             <div className="border-t border-nft-gray-1 p-4 dark:border-nft-black-1 ">
-              <ButtonGroup setActive={setActive} router={router} />
+              <ButtonGroup
+                setActive={setActive}
+                setIsOpen={setIsOpen}
+                router={router}
+              />
             </div>
           </div>
         )}

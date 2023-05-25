@@ -47,4 +47,7 @@ export interface INFTContext {
     id: any
   ) => Promise<void>;
   fetchNFTs: () => Promise<IFormattedNFT[]>;
+  fetchMyNFTsOrListedNFTs: (
+    type: 'fetchItemsListed' | 'fetchMyNFTs'
+  ) => Promise<IFormattedNFT[]>;
 }

@@ -7,6 +7,7 @@ type NavLinksProps = {
   active: ActiveOption;
   setActive: React.Dispatch<React.SetStateAction<ActiveOption>>;
   isMobile?: boolean;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const activeOptionsList: ActiveOption[] = [
@@ -21,7 +22,7 @@ const generateLink = (i: number) => {
       return '/';
 
     case 1:
-      return '/created-nfts';
+      return '/listed-nfts';
 
     case 2:
       return '/my-nfts';
@@ -31,7 +32,12 @@ const generateLink = (i: number) => {
   }
 };
 
-const NavLinks: React.FC<NavLinksProps> = ({ isMobile, active, setActive }) => (
+const NavLinks: React.FC<NavLinksProps> = ({
+  isMobile,
+  active,
+  setActive,
+  setIsOpen,
+}) => (
   <ul
     className={`flexCenter  list-none flex-row ${
       isMobile && 'h-full flex-col '
@@ -42,6 +48,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMobile, active, setActive }) => (
         key={i}
         onClick={() => {
           setActive(item);
+          if (setIsOpen) setIsOpen(false);
         }}
         className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white 
           ${isMobile && 'py-2'}
@@ -60,6 +67,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMobile, active, setActive }) => (
 
 NavLinks.defaultProps = {
   isMobile: false,
+  setIsOpen: undefined,
 };
 
 export default NavLinks;
