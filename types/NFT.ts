@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { BigNumber, ethers } from 'ethers';
+import { NextRouter } from 'next/router';
 
 export interface IFormInput {
   name: string;
