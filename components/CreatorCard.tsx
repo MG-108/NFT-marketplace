@@ -3,6 +3,8 @@ import Image, { StaticImageData } from 'next/image';
 
 import images from '../assets';
 import { NFTContext } from '../context/NFTContext';
+import { INFTContext } from '../types/NFT';
+import ParagraphText from './Text/ParagraphText';
 
 type Props = {
   rank: number;
@@ -17,7 +19,7 @@ const CreatorCard: React.FC<Props> = ({
   creatorAdress,
   creatorsEths,
 }) => {
-  const { nftCurrency } = useContext(NFTContext);
+  const { nftCurrency } = useContext<INFTContext>(NFTContext);
 
   return (
     <div className="m-4 flex min-w-190 flex-col rounded-3xl border border-nft-gray-1 bg-white p-4 shadow-md dark:border-nft-black-3 dark:bg-nft-black-3 minlg:min-w-240 ">
@@ -51,9 +53,7 @@ const CreatorCard: React.FC<Props> = ({
 
       {/* CREATOR ADRESS and CREATOR ETHs */}
       <div className="flexCenter mt-3 flex-col text-center minlg:mt-7">
-        <p className="font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
-          {creatorAdress}
-        </p>
+        <ParagraphText text={creatorAdress} classStyles="text-base" poppins />
         <p className="mt-1 font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
           {creatorsEths.toFixed(2)}{' '}
           <span className="font-normal">{nftCurrency}</span>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { NFTContext } from '../../context/NFTContext';
 import { HeadingText, Loader, NFTCard, Banner } from '../../components';
-import { IFormattedNFT } from '../../types/NFT';
+import { IFormattedNFT, INFTContext } from '../../types/NFT';
 
 import images from '../../assets';
 import { shortenAddress } from '../../utils/shortenAddress';
@@ -11,7 +11,8 @@ import { shortenAddress } from '../../utils/shortenAddress';
 type MyNFTsProps = {};
 
 const MyNFTs: React.FC<MyNFTsProps> = () => {
-  const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext);
+  const { fetchMyNFTsOrListedNFTs, currentAccount } =
+    useContext<INFTContext>(NFTContext);
   const [nfts, setNfts] = useState<IFormattedNFT[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { NFTContext } from '../context/NFTContext';
 import images from '../assets';
 import { shortenAddress } from '../utils/shortenAddress';
+import { INFTContext } from '../types/NFT';
 
 interface NFTDetails {
   i?: number;
@@ -20,7 +21,7 @@ type Props = {
 };
 
 const NFTCard: React.FC<Props> = ({ nft }) => {
-  const { nftCurrency } = useContext(NFTContext);
+  const { nftCurrency } = useContext<INFTContext>(NFTContext);
 
   return (
     <Link href={{ pathname: '/nft-details', query: { ...nft } }}>

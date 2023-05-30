@@ -5,6 +5,7 @@ import { NextRouter } from 'next/router';
 import { NFTContext } from '../../context/NFTContext';
 import { Button } from '..';
 import { ActiveOption } from '.';
+import { INFTContext } from '../../types/NFT';
 
 type ButtonGroupProps = {
   setActive: (value: React.SetStateAction<ActiveOption>) => void;
@@ -17,7 +18,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   setIsOpen,
   router,
 }) => {
-  const { connectWallet, currentAccount } = useContext(NFTContext);
+  const { connectWallet, currentAccount } = useContext<INFTContext>(NFTContext);
 
   return currentAccount ? (
     <Button

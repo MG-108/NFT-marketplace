@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 
 import { NFTContext } from '../../context/NFTContext';
 import { HeadingText, Loader, NFTCard } from '../../components';
-import { IFormattedNFT } from '../../types/NFT';
+import { IFormattedNFT, INFTContext } from '../../types/NFT';
 
 type Props = {};
 
 const ListedNfts: React.FC<Props> = () => {
-  const { fetchMyNFTsOrListedNFTs } = useContext(NFTContext);
+  const { fetchMyNFTsOrListedNFTs } = useContext<INFTContext>(NFTContext);
   const [nfts, setNfts] = useState<IFormattedNFT[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(true);
 

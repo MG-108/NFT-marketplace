@@ -32,6 +32,17 @@ export interface IFormattedNFT {
   tokenURI: string;
 }
 
+export interface IFormattedNFTQuery {
+  price: string;
+  tokenId: string;
+  seller: string;
+  owner: string;
+  image: string;
+  name: string;
+  description: string;
+  tokenURI: string;
+}
+
 export interface INFTContext {
   nftCurrency: string;
   connectWallet: () => Promise<void>;
