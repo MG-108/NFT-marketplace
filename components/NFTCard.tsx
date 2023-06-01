@@ -6,6 +6,7 @@ import { NFTContext } from '../context/NFTContext';
 import images from '../assets';
 import { shortenAddress } from '../utils/shortenAddress';
 import { INFTContext } from '../types/NFT';
+import ParagraphText from './Text/ParagraphText';
 
 interface NFTDetails {
   i?: number;
@@ -22,6 +23,7 @@ type Props = {
 
 const NFTCard: React.FC<Props> = ({ nft }) => {
   const { nftCurrency } = useContext<INFTContext>(NFTContext);
+  const span = <span className="normal">{nftCurrency}</span>;
 
   return (
     <Link href={{ pathname: '/nft-details', query: { ...nft } }}>
@@ -40,12 +42,15 @@ const NFTCard: React.FC<Props> = ({ nft }) => {
         </div>
 
         <div className="flexBetween mt-1 flex-row xs:mt-3 xs:flex-col xs:items-start minlg:mt-3">
-          <p className='minlg:text-lg" font-poppins text-xs font-semibold text-nft-black-1 dark:text-white'>
-            {nft.price} <span className="normal">{nftCurrency}</span>
-          </p>
-          <p className='minlg:text-lg" font-poppins text-xs font-semibold text-nft-black-1 dark:text-white'>
-            {shortenAddress(nft.seller)}
-          </p>
+          <ParagraphText
+            text={`${nft.price} ${nftCurrency}`}
+            classStyles="minlg:text-lg text-xs"
+          />
+
+          <ParagraphText
+            text={shortenAddress(nft.seller)}
+            classStyles="minlg:text-lg text-xs"
+          />
         </div>
       </div>
     </Link>

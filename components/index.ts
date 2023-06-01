@@ -15,6 +15,8 @@ import Footer from './Footer';
 import FooterLinks from './Footer/FooterLinks';
 
 import Loader from './Loader';
+import Modal from './Modal/Modal';
+import PaymentBodyCmp from './Modal/PaymentBodyCmp';
 
 export {
   Navbar,
@@ -30,4 +32,6 @@ export {
   Footer,
   FooterLinks,
   Loader,
+  Modal,
+  PaymentBodyCmp,
 };
